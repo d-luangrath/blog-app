@@ -3,7 +3,6 @@ version: '3.8'
 services:
   app:
     build: .
-    command: python3 hello.py
     volumes: 
       - .:/app
     ports:
@@ -14,6 +13,7 @@ services:
         DB_PASSWORD: postgres
     depends_on:
       - postgres
+    command: tail -F anything
     
   postgres:
     image: postgres:15.3

@@ -1,5 +1,20 @@
-build:
-    docker build -t test:latest .
+# docker image commands
+img-build:
+	docker build -t blog-app:local .
 
-run:
-    docker run -rm -p 127.0.0.1:8000:8000 test:latest
+img-run:
+	docker run -rm blog-app:local
+
+## docker compose commands
+
+build: down
+	docker compose build
+
+up:
+	docker compose up --remove-orphans --detach
+
+down:
+	docker compose down --remove-orphans
+
+sh shell:
+	docker compose exec app bash
