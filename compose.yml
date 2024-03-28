@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    command: python3 hello.py
+    volumes: 
+      - .:/app
+    ports:
+    - "8000:8000"
+    environment:
+        DB_NAME: postgres
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+    depends_on:
+      - postgres
+    
+  postgres:
+    image: postgres:15.3
+    volumes:
+      - ./postgres_data/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
