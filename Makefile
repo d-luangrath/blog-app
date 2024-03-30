@@ -3,7 +3,7 @@ img-build:
 	docker build -t blog-app:local .
 
 img-run:
-	docker run -rm blog-app:local
+	docker run --rm -p 8000:8000 blog-app:local
 
 ## docker compose commands
 
@@ -18,3 +18,6 @@ down:
 
 sh shell:
 	docker compose exec app bash
+
+logs:
+	docker compose logs -f --tail 100 --timestamps app
