@@ -10,17 +10,23 @@ services:
     tty: true
     restart: always
     environment:
-      DB_NAME: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
+      DB_NAME: mydb
+      DB_USER: myuser
+      DB_PASSWORD: mysecretpassword
+      DB_HOST: postgres
+    env_file:
+      - .env
     depends_on:
       - postgres
     
   postgres:
     image: postgres:15.3
+    ports:
+     - "5432:5432"
     volumes:
       - ./postgres_data/db:/var/lib/postgresql/data
+    restart: always
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mysecretpassword
