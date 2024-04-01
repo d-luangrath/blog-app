@@ -23,7 +23,7 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,14 +76,16 @@ WSGI_APPLICATION = "blogapp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 def _compose_connection_url():
-    username = os.getenv('DB_USER')
-    password = os.getenv('DB_PASSWORD')
-    db_name = os.getenv('DB_NAME')
-    hostname = os.getenv('DB_HOST')
-    port = os.getenv('DB_PORT', '5432')
-    
-    return f'postgres://{username}:{password}@{hostname}:{port}/{db_name}'
+    username = os.getenv("DB_USER")
+    password = os.getenv("DB_PASSWORD")
+    db_name = os.getenv("DB_NAME")
+    hostname = os.getenv("DB_HOST")
+    port = os.getenv("DB_PORT", "5432")
+
+    return f"postgres://{username}:{password}@{hostname}:{port}/{db_name}"
+
 
 DATABASES = {
     "default": dj_database_url.config(
@@ -129,6 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "upload"
 
