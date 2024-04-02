@@ -1,17 +1,3 @@
-# docker image commands
-img-build:
-	docker build -t blog-app:local .
-
-img-run:
-	docker run \
-		--rm \
-		-p 8000:8000 \
-		-e DB_NAME=mydb \
-		-e DB_USER=myuser \
-		-e DB_PASSWORD=mysecretpassword \
-		-e DB_HOST=192.168.144.1 \
-	 blog-app:local
-
 ## docker compose commands
 
 build: down
@@ -33,3 +19,17 @@ logs:
 
 db-shell:
 	docker compose exec postgres psql -h 0.0.0.0 -p 5432 -d mydb -U myuser
+
+# docker image commands
+img-build:
+	docker build -t blog-app:local .
+
+img-run:
+	docker run \
+		--rm \
+		-p 8000:8000 \
+		-e DB_NAME=mydb \
+		-e DB_USER=myuser \
+		-e DB_PASSWORD=mysecretpassword \
+		-e DB_HOST=192.168.144.1 \
+	 blog-app:local
