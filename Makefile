@@ -20,6 +20,12 @@ logs:
 db-shell:
 	docker compose exec postgres psql -h 0.0.0.0 -p 5432 -d mydb -U myuser
 
+migrations:
+	docker compose exec app python manage.py makemigrations
+
+migrate: migrations
+	docker compose exec app python manage.py migrate
+
 # docker image commands
 img-build:
 	docker build -t blog-app:local .
