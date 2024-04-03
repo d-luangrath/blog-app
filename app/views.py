@@ -8,7 +8,11 @@ def index(request):
     return render(request, 'app/index.html', context)
 
 def post_page(request, slug):
-    post = Post.objects.get(slug=slug)
+    try:
+        post = Post.objects.get(slug=slug)
+    except Post.DoesNotExist:
+        context = {"slug": slug}
+        return render(request, 'app/not_found.html', context)
 
     if post.view_count is None:
         post.view_count = 1
@@ -16,5 +20,5 @@ def post_page(request, slug):
         post.view_count += 1
     post.save()
     
-    context = {'post':post}
+    context = {'post': post}
     return render(request, 'app/post.html', context)
