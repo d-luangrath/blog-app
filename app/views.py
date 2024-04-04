@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import Post
+from app.models import Post, Comments
 from app.forms import CommentForm
 from django.http import HttpResponse
 
@@ -19,7 +19,9 @@ def post_page(request, slug):
         return render(request, "app/not_found.html", context)
 
     post = Post.objects.get(slug=slug)
+    comments = Comments.objects.filter(post=post)
     form = CommentForm()
+
 
     if request.POST:
         comment_form = CommentForm(request.POST)
@@ -36,7 +38,7 @@ def post_page(request, slug):
         post.view_count += 1
     post.save()
 
-    context = {"post": post, "form": form}
+    context = {"post": post, "form": form, 'comments': comments}
     return render(request, "app/post.html", context)
 
 
