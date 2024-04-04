@@ -16,6 +16,7 @@ services:
       DB_HOST: postgres
     env_file:
       - .env
+    command: python manage.py runserver 0.0.0.0:8000 --insecure 
     depends_on:
       - postgres
     
@@ -33,3 +34,4 @@ services:
 
 volumes:
   pgdata:
+#   web-static:
