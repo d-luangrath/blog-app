@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from app.models import Post
 from app.forms import CommentForm
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -37,3 +38,7 @@ def post_page(request, slug):
 
     context = {"post": post, "form": form}
     return render(request, "app/post.html", context)
+
+
+def health_check(request):
+    return HttpResponse("ok")
