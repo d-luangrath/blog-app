@@ -20,17 +20,17 @@ Note: This app is under active development
 
 ## Demo
 **Home page of blog post showing top and featured posts**
-![Home Page](/static/app/images/home.png)
-(/static/images/app/home-features.png)
+![Home Page](app/static/app/images/home.png)
+![Home Page](app/static/images/app/home-features.png)
 
 **Post page displays the photo and blog post**
-![Post page](/static/app/images/blog-post.png)
+![Post page](app/static/app/images/blog-post.png)
 
 **Comment on a blog post and reply**
-![Post Page](/static/app/images/comment.png)
+![Post Page](app/static/app/images/comment.png)
 
 **Clicking on a tag of a post and navigating to posts assicated with the tag**
-![Tag Page](/static/app/images/tags.png)
+![Tag Page](app/static/app/images/tags.png)
 
 ## Prerequisites
 - Docker
