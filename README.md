@@ -1,50 +1,64 @@
 # Blog App
 
-Note: This app is under active development
+Note: This app is under active development :wink:
 
 ## Features
 - The home page displays features of top and recent posts on the blog
-- Authentication functionality of login, logout, signup and robust validation
 - Post page with various elements such as tags, likes, comments, and bookmarking a particular post
 - Comment system allows a user to leave a comment and reply to that particular comment
 - Dedicated page for tags and authors
 - Personalize experience based on user behavior
 - Allow users to search on the website
 
+## Todo
+- [x] Build post tags
+- [ ] Authentication functionality of login, logout, signup and robust validation
+- [ ] Bookmarking and "likes"
+- [ ] Personalize experience based on user behavior
+- [ ] Implement search across the website
+- [ ] Terraform - Infrastructure as code (IaC) - configs to deploy to AWS
+- [ ] Deploy to AWS from terminal
+- [ ] Automated tests
+
 ## Technologies
 - Python
 - Django
 - Docker
-- AWS(ECS, RDS)
+- AWS (ECS, RDS)
 - Postgres
 
-## Demo
+## Demo (reminder - development is in progress)
 **Home page of blog post showing top and featured posts**
-![Home Page](app/static/app/images/home.png)
-![Home Page half](app/static/images/app/home-features.png)
+
+![Home Page](img/home.png)
+
+![Home Page half](img/home-features.png)
 
 **Post page displays the photo and blog post**
-![Post page](app/static/app/images/blog-post.png)
+![Post page](img/blog-post.png)
 
 **Comment on a blog post and reply**
-![Post Page half](app/static/app/images/comment.png)
+![Post Page half](img/comment.png)
 
 **Clicking on a tag of a post and navigating to posts assicated with the tag**
-![Tag Page](app/static/app/images/tags.png)
+![Tag Page](img/tags.png)
 
-## Prerequisites
+## Running the app locally
+
+### Prerequisites
 - Docker
-- Make command
+- `make` command
 
 #### Steps
 1. Clone the repo
-2. Navigate to the repo directory
-3. Run make build to build Docker images
-4. Run make up
-5. Navigate to http://0.0.0.0:8000
+1. Navigate to the repo directory
+1. Run `make` or `make build` to build containers
+1. Run `make up`
+1. Run `make migrate`
+1. Navigate to http://0.0.0.0:8000
 
 #### Make Commands
-```shell
+```
 make build          Build containers
 make up             Start containers
 make down           Stop local dev environment
