@@ -257,14 +257,14 @@ header .container {
   margin: 1rem 0;
 }
 
-.cetagory {
+.category {
   background: var(--red);
   width: fit-content;
   border-radius: 5rem;
   padding: 0.5rem 1rem;
 }
 
-.cetagory p {
+.category p {
   color: white;
   font-size: 1.2rem;
 }
