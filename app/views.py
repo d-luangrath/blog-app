@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import Post, Comments, Tag, Profile
+from app.models import Post, Comments, Tag, Profile, WebsiteMeta
 from app.forms import CommentForm, SubscribeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -14,6 +14,10 @@ def index(request):
     featured_blog = Post.objects.filter(is_featured=True)
     subscribe_form = SubscribeForm()
     success = None
+    website_info = None
+
+    if WebsiteMeta.objects.all().exists():
+        website_info = WebsiteMeta.objects.all()[0]
 
     if featured_blog:
         featured_blog = featured_blog[0]
@@ -31,7 +35,8 @@ def index(request):
         "recent_posts": recent_posts,
         "subscribe_form": subscribe_form,
         "success": success,
-        "featured_blog": featured_blog
+        "featured_blog": featured_blog,
+        "website_info": website_info
     }
     
     return render(request, "app/index.html", context)
@@ -119,7 +124,10 @@ def search_posts(request):
     if q := request.GET.get('q'):  # 'q' is the search query getting from request
         search_query = q  # store the query
     posts = Post.objects.filter(title__icontains=search_query)  # query the db to get all the post from the db
-    context = {'posts': posts, 'search_query_val': search_query}
+    context = {
+        "posts": posts,
+        "search_query_val": search_query
+    }
     return render(request, 'app/search.html', context)
 
 

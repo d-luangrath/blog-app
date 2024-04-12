@@ -17,9 +17,11 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.first_name
 
+
 class Subscribe(models.Model):
     email = models.EmailField(max_length=100)
     date = models.DateTimeField(auto_now=True)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
@@ -34,6 +36,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -45,6 +48,7 @@ class Post(models.Model):
     is_featured = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
+
 class Comments(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now=True)
@@ -54,3 +58,9 @@ class Comments(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     parent = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True, related_name='replies')
+
+
+class WebsiteMeta(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
+    about = models.TextField()
