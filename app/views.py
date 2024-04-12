@@ -51,14 +51,11 @@ def post_page(request, slug):
     if request.POST:
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid:
-            parent_obj = None
-            if request.POST.get('parent'):
+            if parent := request.POST.get('parent'):
                 # save reply
-                parent = request.POST.get('parent')
-                parent_obj = Comments.objects.get(id=parent)
-                if parent_obj:
+                if parent_comment := Comments.objects.get(id=parent):
                     comment_reply = comment_form.save(commit=False)
-                    comment_reply.parent = parent_obj
+                    comment_reply.parent = parent_comment
                     comment_reply.post = post
                     comment_reply.save()
                     return HttpResponseRedirect(reverse('post_page', kwargs={'slug': slug}))
@@ -84,6 +81,7 @@ def post_page(request, slug):
     
     return render(request, "app/post.html", context)
 
+
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
 
@@ -99,6 +97,7 @@ def tag_page(request, slug):
     }
     return render(request, 'app/tag.html', context)
 
+
 def author_page(request, slug):
     profile = Profile.objects.get(slug=slug)
 
@@ -113,6 +112,16 @@ def author_page(request, slug):
         'top_authors': top_authors
     }
     return render(request, 'app/author.html', context)
+
+
+def search_posts(request):
+    search_query = ""  # query entered in the search box
+    if q := request.GET.get('q'):  # 'q' is the search query getting from request
+        search_query = q  # store the query
+    posts = Post.objects.filter(title__icontains=search_query)  # query the db to get all the post from the db
+    context = {'posts': posts, 'search_query_val': search_query}
+    return render(request, 'app/search.html', context)
+
 
 def health_check(request):
     return HttpResponse("ok")
