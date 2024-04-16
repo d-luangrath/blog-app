@@ -37,9 +37,10 @@
           <a href="">All Post</a>
         </div>
         <div class="action-btn">
-          <a href="pages/login.html"
-            ><button class="btn btn-scoundary">Login</button></a
-          >
+          <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-scoundary" type="submit">Logout</button>
+          </form>
           <a href="pages/signup.html">
             <button class="btn btn-primary">Sign Up</button></a
           >
