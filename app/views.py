@@ -68,7 +68,6 @@ def post_page(request, slug):
     number_of_likes = post.number_of_likes()
     post_is_liked = liked
 
-
     if request.POST:
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid:
@@ -119,6 +118,7 @@ def tag_page(request, slug):
         'recent_posts':recent_posts,
         'tags': tags
     }
+
     return render(request, 'app/tag.html', context)
 
 
@@ -135,6 +135,7 @@ def author_page(request, slug):
         'recent_posts':recent_posts,
         'top_authors': top_authors
     }
+
     return render(request, 'app/author.html', context)
 
 
@@ -147,6 +148,7 @@ def search_posts(request):
         "posts": posts,
         "search_query_val": search_query
     }
+
     return render(request, 'app/search.html', context)
 
 
@@ -159,6 +161,7 @@ def about(request):
     context={
         "website_info": website_info,
     }
+
     return render(request, 'app/about.html', context)
 
 
@@ -172,6 +175,7 @@ def register_user(request):
             return redirect("/")
 
     context = {"form": form}
+
     return render(request, 'registration/registration.html', context)
 
 
@@ -181,6 +185,7 @@ def bookmark_post(request, slug):
         post.bookmarks.remove(request.user)
     else:
         post.bookmarks.add(request.user)
+
     return HttpResponseRedirect(reverse('post_page', args=[str(slug)]))
 
 
@@ -190,7 +195,15 @@ def like_post(request, slug):
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
+
     return HttpResponseRedirect(reverse('post_page', args=[str(slug)]))
+
+
+def all_bookmarked_posts(request):
+    all_bookmarked_posts = Post.objects.filter(bookmarks=request.user)
+    context = {"all_bookmarked_posts": all_bookmarked_posts}
+
+    return render(request, 'app/all_bookmarked_posts.html', context)
 
 
 def health_check(request):
