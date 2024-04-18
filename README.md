@@ -13,12 +13,18 @@ Note: This app is under active development :wink:
 ## Todo
 - [x] Build post tags
 - [x] Authentication functionality of login, logout, signup and robust validation
-- [ ] Bookmarking and "likes"
+- [x] Bookmarking and "likes"
 - [x] Personalize experience based on user behavior
 - [x] Implement search across the website
-- [ ] Terraform - Infrastructure as code (IaC) - configs to deploy to AWS
-- [ ] Deploy to AWS from terminal
+- [x] Terraform - Infrastructure as code (IaC) - configs to deploy to AWS
+- [x] Deploy to AWS from terminal
 - [ ] Automated tests
+- [ ] ajax for likes and bookmarks
+- [ ] Build all posts page
+- [ ] Build all bookmarks page
+- [ ] Build all likes page
+- [ ] fix the footer
+- [ ] build the side bar
 
 ## Technologies
 - Python
