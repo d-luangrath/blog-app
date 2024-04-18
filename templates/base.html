@@ -37,14 +37,20 @@
           <a href="">All Post</a>
         </div>
         <div class="action-btn">
+          {% if user.is_authenticated %}
           <form action="{% url 'logout' %}" method="post">
               {% csrf_token %}
               <button class="btn btn-scoundary" type="submit">Logout</button>
           </form>
+          {% else %}
+          <a href="{% url 'login' %}"
+            ><button class="btn btn-secondary">Login</button></a
+            >
           <a href="pages/signup.html">
             <button class="btn btn-primary">Sign Up</button></a
-          >
-          <i class="uil uil-align-center-alt menu" onclick="menu()"></i>
+            >
+            <i class="uil uil-align-center-alt menu" onclick="menu()"></i>
+            {% endif %}
         </div>
       </div>
     </header>
