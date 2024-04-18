@@ -12,10 +12,10 @@ Note: This app is under active development :wink:
 
 ## Todo
 - [x] Build post tags
-- [ ] Authentication functionality of login, logout, signup and robust validation
+- [x] Authentication functionality of login, logout, signup and robust validation
 - [ ] Bookmarking and "likes"
-- [ ] Personalize experience based on user behavior
-- [ ] Implement search across the website
+- [x] Personalize experience based on user behavior
+- [x] Implement search across the website
 - [ ] Terraform - Infrastructure as code (IaC) - configs to deploy to AWS
 - [ ] Deploy to AWS from terminal
 - [ ] Automated tests
