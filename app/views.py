@@ -195,7 +195,7 @@ def like_post(request, slug):
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
-
+        
     return HttpResponseRedirect(reverse('post_page', args=[str(slug)]))
 
 
