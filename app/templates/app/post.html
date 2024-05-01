@@ -78,25 +78,15 @@
                     <div class="social-share">
                       <div class="reactions">
                         <div class="likes">
-                          {% if user.is_authenticated %}
-                          <form action="{% url "like_post" post.slug %}" method="POST">
+                          <input id="hidden-is-authenticated" type="hidden" value="{{user.is_authenticated}}">
                             {% csrf_token %}
-                            <input type="hidden" name="post_id" value="{{post.id}}">
-                            {% if post_is_liked %}
-                            <button type="submit">
-                          <i class="fa-solid fa-heart"></i> <span>{{number_of_likes}}</span>
+                            <button id="fav" type="submit" post-id={{ post.id }} csrfmiddlewaretoken="{{csrf_token}}">
+                              {% if post_is_liked %}
+                                <i class="fa-solid fa-heart" id="heart"></i> <span id="likes-count">{{number_of_likes}}</span>
+                              {% else %}
+                                <i class="uil uil-heart" id="heart"></i> <span id="likes-count">{{number_of_likes}}</span>
+                              {% endif %}
                             </button>
-                            {% else %}
-                            <button type="submit">
-                              <i class="uil uil-heart"></i> <span>{{number_of_likes}}</span>
-                            </button>
-                            {% endif %}
-                          </form>
-                          {% else %}
-                          <a class="track" href="{% url "login" %}">
-                            <i class="uil uil-heart"></i> <span>{{number_of_likes}}</span>
-                          </a><br>
-                          {% endif %}
                         </div>
 
                         <div class="total-comments">
@@ -305,6 +295,8 @@
         </div>
       </div>
       
-  <script src="{% static 'app/bookmark.js' %}"></script>
-      {% endblock content %}
+    <script src="{% static 'app/bookmark.js' %}"></script>
+    <script src="{% static 'app/likes.js' %}"></script>
+
+{% endblock content %}
       

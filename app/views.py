@@ -201,14 +201,19 @@ def bookmark_post(request, slug):
 
     return JsonResponse({"bookmarked": bookmarked})
 
+
 def like_post(request, slug):
-    post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    if post.likes.filter(id=request.user.id).exists():
-        post.likes.remove(request.user)
-    else:
-        post.likes.add(request.user)
-        
-    return HttpResponseRedirect(reverse('post_page', args=[str(slug)]))
+    if request.method == "POST":
+        post = get_object_or_404(Post, id=slug)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+            liked = False
+        else:
+            post.likes.add(request.user)
+            liked = True
+
+    return JsonResponse({'liked': liked, 'likes_count': post.likes.count()})
+
 
 
 def all_bookmarked_posts(request):
