@@ -34,28 +34,26 @@
                     <p class="view-count">{{post.view_count}} view{{post.view_count|pluralize}}</p>
                   </div>
                   <div class="track">
-                    {% if user.is_authenticated %}
-                    <form action="{% url "bookmark_post" post.slug %}" method="POST">
+                    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                    {% comment %} <form action="{% url "bookmark_post" post.slug %}" method="POST"> {% endcomment %}
+                      <input id="hidden-is-authenticated" type="hidden" value="{{user.is_authenticated}}">
                       {% csrf_token %}
-                      <input type="hidden" name="post_id" value="{{post.id}}">
-                      {% if is_bookmarked %}
-                      <button type="submit" class="btn btn-info">
-                        <i class="fa-solid fa-bookmark"></i>
-                        <p class="bookmark"> Remove Bookmark</p>
+                      <button id="bookmark" type="submit" post-id={{ post.id }} csrfmiddlewaretoken="{{csrf_token}}">
+                        {% if is_bookmarked %}
+                          <i class="fa-solid fa-bookmark" id="marked"></i>
+                          {% comment %} <p class="bookmark"> Remove Bookmark</p> {% endcomment %}
+                        {% else %}
+                          <i class="uil uil-bookmark-full" id="marked"></i>
+                          {% comment %} <p class="bookmark">Bookmark</p> {% endcomment %}
+                        {% endif %}
                       </button>
-                      {% else %}
-                      <button type="submit" class="btn btn-info">
-                        <i class="uil uil-bookmark-full"></i>
-                        <p class="bookmark">Bookmark</p>
-                      </button>
-                      {% endif %}
-                    </form>
+                    {% comment %} </form>
                     {% else %}
                     <a class="track" href="{% url "login" %}">
                       <i class="uil uil-bookmark-full"></i>
                       <p class="bookmark"> Bookmark</p>
                     </a><br>
-                    {% endif %}
+                    {% endif %} {% endcomment %}
                   </div>
                 </div>
               </div>
@@ -306,6 +304,7 @@
           <!-- right layout end -->
         </div>
       </div>
-
+      
+  <script src="{% static 'app/bookmark.js' %}"></script>
       {% endblock content %}
       

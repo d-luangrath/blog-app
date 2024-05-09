@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from app.models import Post, Comments,Tag, Profile, WebsiteMeta
 from app.forms import CommentForm, SubscribeForm, NewUserForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db.models import Count
@@ -190,14 +190,16 @@ def register_user(request):
 
 
 def bookmark_post(request, slug):
-    post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    if post.bookmarks.filter(id=request.user.id).exists():
-        post.bookmarks.remove(request.user)
-    else:
-        post.bookmarks.add(request.user)
+    if request.method == "POST":
+        post = get_object_or_404(Post, id=slug)
+        if post.bookmarks.filter(id=request.user.id).exists():
+            post.bookmarks.remove(request.user)
+            bookmarked = False
+        else:
+            post.bookmarks.add(request.user)
+            bookmarked = True
 
-    return HttpResponseRedirect(reverse('post_page', args=[str(slug)]))
-
+    return JsonResponse({"bookmarked": bookmarked})
 
 def like_post(request, slug):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))

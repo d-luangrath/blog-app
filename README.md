@@ -20,15 +20,18 @@ Note: This app is under active development :wink:
 - [ ] Automated tests
 - [ ] Allow users to post
 - [ ] Redirect social links
-- [ ] Use ajax for likes and bookmarking posts
+- [x] Use ajax for likes and bookmarking posts
 
 
 ## Technologies
 - Python
+- Javascript
 - Django
 - Docker
 - AWS (ECS, RDS)
+- Terraform
 - Postgres
+- Pytest
 
 ## Demo (reminder - development is in progress)
 **Home page of blog post showing top and featured posts**
